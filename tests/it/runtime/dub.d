@@ -53,8 +53,9 @@ unittest {
 }
 
 
+// See #74 for "posix"
 @("dub project with postbuild command")
-@Tags(["dub", "ninja"])
+@Tags(["dub", "ninja", "posix"])
 unittest {
     with(immutable ReggaeSandbox("dub_postbuild")) {
         runReggae("-b", "ninja", "--dflags=-g -debug");
@@ -394,6 +395,7 @@ unittest {
 }
 
 
+// See #73 for "posix"
 @("static library")
 @Tags(["dub", "ninja", "posix"])
 unittest {
