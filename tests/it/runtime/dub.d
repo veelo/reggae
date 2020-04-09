@@ -437,8 +437,16 @@ unittest {
 @Tags(["dub", "ninja"])
 unittest {
     with(immutable ReggaeSandbox("dub_prebuild_oops")) {
-        runReggae("-b", "ninja", "--dflags=-g -debug")
-            .shouldThrowWithMessage(
-                "Error calling foo bar baz quux:\n/bin/sh: foo: command not found\n");
+
+        try
+            runReggae("-b", "ninja", "--dflags=-g -debug");
+        catch(Exception e) {
+            version(Windows) {
+                "Error calling foo bar baz quux:".should.be in e.msg;
+                "'foo' is not recognized as an internal or external command".should.be in e.msg;
+            } else
+                  e.msg.should == "Error calling foo bar baz quux:\r\n/bin/sh: foo: command not found\n";
+        }
+
     }
 }
