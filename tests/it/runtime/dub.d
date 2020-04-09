@@ -395,7 +395,7 @@ unittest {
 
 
 @("static library")
-@Tags(["dub", "ninja"])
+@Tags(["dub", "ninja", "posix"])
 unittest {
 
     with(immutable ReggaeSandbox()) {
